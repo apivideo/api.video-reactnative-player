@@ -1,0 +1,63 @@
+{
+  "name": "@api.video/react-native-player",
+  "author": "api.video",
+  "version": "0.0.2", 
+  "description": "React Native api.video player",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/api.video/react-native-player/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "player",
+    "apivideo"
+  ],
+  "private": false,
+  "module": "dist/react-native-player.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "scripts"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "postinstall": "node ./scripts/add-native-deps.js"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.60 <=0.64"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@types/react": "~16.9.35",
+    "@types/react-native": ">0.60.0",
+    "husky": "^4.2.3",
+    "tsdx": "^0.12.3",
+    "tslib": "^1.11.1",
+    "typescript": "~4.0.0"
+  },
+  "dependencies": {
+    "react-native-webview": "^11.6.2"
+  },
+  "nativeDependencies": [
+    "react-native-webview"
+  ],
+  "bugs": {
+    "url": "https://github.com/api.video/react-native-player/issues"
+  },
+  "homepage": "https://github.com/api.video/react-native-player"
+}
