@@ -42,11 +42,6 @@ export default class ApiVideoPlayer extends Component<
   PlayerState
 > {
   webref?: WebView;
-  /*
-    constructor(props: Readonly<PlayerProps>) {
-        super(props);
-        this.webref = null;
-    }*/
 
   play() {
     this.webref?.injectJavaScript(`player.play(); true;`);
