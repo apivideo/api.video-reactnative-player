@@ -31,7 +31,7 @@ const App = () => {
   const [streaming, setStreaming] = useState(false);
 
   return (
-    <ApiVideoPlayer videoId="vi2G6Qr8ZVE67dWLNymk7qbc">
+    <ApiVideoPlayer videoId="vi2G6Qr8ZVE67dWLNymk7qbc" />
   );
 }
 
