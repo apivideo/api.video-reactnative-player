@@ -21,22 +21,43 @@ cd ios && pod install
 
 ## Usage
 
+### Getting started
+
 ```jsx
-import React, { useRef, useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import React from 'react';
 import ApiVideoPlayer from '@api.video/react-native-player';
 
-const App = () => {
-  const ref = useRef(null);
-  const [streaming, setStreaming] = useState(false);
-
-  return (
+const App = () => 
     <ApiVideoPlayer videoId="vi2G6Qr8ZVE67dWLNymk7qbc" />
-  );
-}
-
+  
 export default App;
 ```
+
+### Using methods
+```jsx
+import React, { Component } from 'react';
+import ApiVideoPlayer from '@api.video/react-native-player';
+import { Button, View } from 'react-native';
+
+export default class App extends Component {
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ApiVideoPlayer
+          ref={(r) => (this.player = r)}
+          muted={true}
+          videoId="vi2G6Qr8ZVE67dWLNymk7qbc" />
+
+        <Button onPress={() => this.player.play()} title="Play" />
+        <Button onPress={() => this.player.pause()} title="Pause" />
+
+      </View>
+    )
+  }
+}
+```
+
 
 ## Props & Methods
 
@@ -49,6 +70,7 @@ type PlayerProps = {
     hideTitle?: boolean;
     autoplay?: boolean;
     loop?: boolean;
+    muted?: boolean;
     style?: StyleProp<ViewStyle>;
 
     onControlsDisabled?: () => void;

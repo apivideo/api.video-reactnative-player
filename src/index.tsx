@@ -4,9 +4,6 @@ import { WebView } from 'react-native-webview';
 
 const PLAYER_HOST = 'https://embed.api.video';
 const DEFAULT_STYLE = { width: '100%', height: '100%' };
-type PlayerState = {
-  status: string;
-};
 
 type PlayerProps = {
   videoId: string;
@@ -15,6 +12,7 @@ type PlayerProps = {
   hideTitle?: boolean;
   autoplay?: boolean;
   loop?: boolean;
+  muted?: boolean;
   style?: StyleProp<ViewStyle>;
 
   onControlsDisabled?: () => void;
@@ -37,10 +35,14 @@ type PlayerProps = {
   onVolumeChange?: (volume: number) => void;
 };
 
-export default class ApiVideoPlayer extends Component<
-  PlayerProps,
-  PlayerState
-> {
+const FRAGMENTS = {
+  hideControls: 'hide-controls',
+  hideTitle: 'hide-title',
+  autoplay: 'autoplay',
+  loop: 'loop',
+};
+
+export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
   webref?: WebView;
 
   play() {
@@ -160,22 +162,20 @@ export default class ApiVideoPlayer extends Component<
   }
 
   private buildEmbedUrl() {
-    const fragmentsMap = {
-      hideControls: 'hide-controls',
-      hideTitle: 'hide-title',
-      autoplay: 'autoplay',
-      loop: 'loop',
-    };
-    const fragments = Object.keys(fragmentsMap).filter(
-      (fragment: string) => (this.props as any)[fragment] === true
-    );
-
     let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${
       this.props.videoId
     }`;
+
+    if (this.props.muted === true) {
+      url += '?muted=true';
+    }
+
+    const fragments = Object.keys(FRAGMENTS).filter(
+      (fragment: string) => (this.props as any)[fragment] === true
+    );
+
     if (fragments.length > 0) {
-      url +=
-        '#' + fragments.map((f: any) => (fragmentsMap as any)[f]).join(';');
+      url += '#' + fragments.map((f: any) => (FRAGMENTS as any)[f]).join(';');
     }
     return url;
   }
