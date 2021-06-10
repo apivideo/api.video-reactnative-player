@@ -23,7 +23,7 @@ cd ios && pod install
 
 For the moment, this player component is based on the api.video's javascript player (displayed in a [react-native-webview](https://github.com/react-native-webview/react-native-webview)), and therefore it suffers from the same limitation as every players displayed in browsers. 
 
-Especially, the first play action on an unmuted video must triggered by a user interaction with the player (that means that you can't use the `play()` methods on an unmuted video if the playback hasn't been started before).
+Especially, on Android decives, the first play action on an unmuted video must triggered by a user interaction with the player (that means that you can't use the `play()` methods on an unmuted video if the playback hasn't been started before).
 
 We plan to base the player component on natives video players in a further release to avoid this kind of limitation. Stay tuned!
 
