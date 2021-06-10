@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "rm -Rf node_modules/@api.video/react-native-player/node_modules/react*"
   },
   "dependencies": {
     "react": "16.13.1",
