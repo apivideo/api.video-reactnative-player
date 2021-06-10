@@ -19,6 +19,14 @@ Install the native dependencies with Cocoapods
 cd ios && pod install
 ```
 
+## Limitations
+
+For the moment, this player component is based on the api.video's javascript player (displayed in a [react-native-webview](https://github.com/react-native-webview/react-native-webview)), and therefore it suffers from the same limitation as every players displayed in browsers. 
+
+Especially, the first play action on an unmuted video must triggered by a user interaction with the player (that means that you can't use the `play()` methods on an unmuted video if the playback hasn't been started before).
+
+We plan to base the player component on natives video players in a further release to avoid this kind of limitation. Stay tuned!
+
 ## Usage
 
 ### Getting started
@@ -64,13 +72,21 @@ export default class App extends Component {
 ```ts
 // props:
 type PlayerProps = {
+    // the id of the video (required)
     videoId: string;
+    // whether the video is vod or live (default is 'vod')
     type?: 'vod' | 'live';
+    // the controls are hidden (default false)
     hideControls?: boolean;
+    // the video title is hidden (default false)
     hideTitle?: boolean;
+    // start playing the video as soon as it is loaded (default false)
     autoplay?: boolean;
+    // once the video is finished it automatically starts again (default false)
     loop?: boolean;
+    // the video is muted (default false)
     muted?: boolean;
+    // style to apply to the player component
     style?: StyleProp<ViewStyle>;
 
     onControlsDisabled?: () => void;
