@@ -5,7 +5,7 @@ import { WebView } from 'react-native-webview';
 const PLAYER_HOST = 'https://embed.api.video';
 const DEFAULT_STYLE = { width: '100%', height: '100%' };
 
-type PlayerProps = {
+export type PlayerProps = {
   videoId: string;
   type?: 'vod' | 'live';
   hideControls?: boolean;
@@ -161,7 +161,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     }
   }
 
-  private buildEmbedUrl() {
+  buildEmbedUrl() {
     let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${
       this.props.videoId
     }`;
