@@ -190,6 +190,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
           this.onMessage(JSON.parse(msg.nativeEvent.data))
         }
         allowsInlineMediaPlayback={true}
+        allowsFullscreenVideo={true}
         injectedJavaScriptBeforeContentLoaded={`window.addEventListener('message', (m) => window.ReactNativeWebView.postMessage(JSON.stringify(m.data)))`}
       />
     );
