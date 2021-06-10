@@ -51,9 +51,9 @@ Remember to add tests for your change if possible. Run the unit tests by:
 yarn test
 ```
 
-To edit the Objective-C files, open `example/ios/ReactNativeLivestreamExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > @api.video/react-native-livestream`.
+To edit the Objective-C files, open `example/ios/example.xcworkspace` in XCode and find the source files at `Pods > Development Pods > @api.video/react-native-player`.
 
-To edit the Kotlin files, open `example/android` in Android studio and find the source files at `apivideoreactnativelivestream` under `Android`.
+To edit the Kotlin files, open `example/android` in Android studio and find the source files at `example` under `Android`.
 
 ### Commit message convention
 
