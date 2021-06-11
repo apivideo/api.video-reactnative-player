@@ -44,6 +44,7 @@ const FRAGMENTS = {
 
 export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
   webref?: WebView;
+  playerUrl: string;
 
   play() {
     this.webref?.injectJavaScript(`player.play(); true;`);
@@ -94,6 +95,35 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
   }
   unmute() {
     this.webref?.injectJavaScript(`player.muted(false); true;`);
+  }
+
+  constructor(props: PlayerProps) {
+    super(props);
+    this.playerUrl = this.buildEmbedUrl(props);
+  }
+
+  componentDidUpdate(prevProps: PlayerProps) {
+    if(typeof this.props.hideControls !== 'undefined' && prevProps.hideControls !== this.props.hideControls) {
+      this.props.hideControls ? this.hideControls() : this.showControls();
+    }
+    if(typeof this.props.loop !== 'undefined' && prevProps.loop !== this.props.loop) {
+      this.setLoop(this.props.loop);
+    }
+    if(typeof this.props.muted !== 'undefined' && prevProps.muted !== this.props.muted) {
+      this.props.muted ? this.mute() : this.unmute();
+    }
+    if(typeof this.props.hideTitle !== 'undefined' && prevProps.hideTitle !== this.props.hideTitle) {
+      console.log("'hideTitle' property can't be changed once the player is loaded. It will have no effect.");
+    }
+    if(typeof this.props.autoplay !== 'undefined' && prevProps.autoplay !== this.props.autoplay) {
+      console.log("'autoplay' property can't be changed once the player is loaded. It will have no effect.");
+    }
+    if(typeof this.props.type !== 'undefined' && prevProps.type !== this.props.type) {
+      console.log("'type' property can't be changed once the player is loaded. It will have no effect.");
+    }
+    if(typeof this.props.videoId !== 'undefined' && prevProps.videoId !== this.props.videoId) {
+      console.log("'videoId' property can't be changed once the player is loaded. It will have no effect.");
+    }
   }
 
   private onMessage(message: any) {
@@ -161,17 +191,17 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     }
   }
 
-  buildEmbedUrl() {
+  buildEmbedUrl(props: PlayerProps) {
     let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${
-      this.props.videoId
+      props.videoId
     }`;
 
-    if (this.props.muted === true) {
+    if (props.muted === true) {
       url += '?muted=true';
     }
 
     const fragments = Object.keys(FRAGMENTS).filter(
-      (fragment: string) => (this.props as any)[fragment] === true
+      (fragment: string) => (props as any)[fragment] === true
     );
 
     if (fragments.length > 0) {
@@ -184,7 +214,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     return (
       <WebView
         ref={(r: any) => (this.webref = r)}
-        source={{ uri: this.buildEmbedUrl() }}
+        source={{ uri: this.playerUrl }}
         style={this.props.style || DEFAULT_STYLE}
         onMessage={(msg: any) =>
           this.onMessage(JSON.parse(msg.nativeEvent.data))
