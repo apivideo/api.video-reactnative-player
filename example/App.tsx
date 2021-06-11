@@ -26,6 +26,7 @@ const [hideTitle, setHideTitle] = React.useState<true | false>(false);
 const [actions, setActions] = React.useState<'play' | 'pause'>('pause');
 const [autoPlay, setAutoPlay] = React.useState<true | false>(false);
 const [loop, setLoop] = React.useState<true | false>(false);
+  const [currentTime, setCurrentTime] = React.useState<number>(0);
   return (
     <>
       <View style={styles.view}>
@@ -36,6 +37,7 @@ const [loop, setLoop] = React.useState<true | false>(false);
           hideTitle={true}
           muted={mute}
           loop={loop}
+          onTimeUpdate={(time) => setCurrentTime(time)}
         />
 
       </View>
@@ -52,6 +54,7 @@ const [loop, setLoop] = React.useState<true | false>(false);
         <Text style={{ color: 'white' }}>{`Muted: ${mute}`}</Text>
         <Text style={{ color: 'white' }}>{`Auto play: ${autoPlay}`}</Text>
         <Text style={{ color: 'white' }}>{`Loop: ${loop}`}</Text>
+        <Text style={{ color: 'white' }}>{`Current time: ${parseInt(`${currentTime*100}`, 10)/100}s`}</Text>
       </View>
       <View style={{ position: 'absolute', bottom: 40, right: 20 }}>
         <Text style={{ color: 'black' }}>{`Hide Controls`}</Text>
