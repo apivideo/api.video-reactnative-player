@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import ApiVideoPlayer, { PlayerProps } from '../src/index';
 
-const getEmbedUrlForConfig = (config: PlayerProps) => new ApiVideoPlayer(config, {}).buildEmbedUrl();
+const getEmbedUrlForConfig = (config: PlayerProps) => new ApiVideoPlayer(config).buildEmbedUrl(config);
 
 describe('Embed URL are properly generated', () => {
     it('generate simple urls', () => {
