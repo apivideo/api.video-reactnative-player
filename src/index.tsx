@@ -216,6 +216,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
         ref={(r: any) => (this.webref = r)}
         source={{ uri: this.playerUrl }}
         style={this.props.style || DEFAULT_STYLE}
+        scrollEnabled={false}
         onMessage={(msg: any) =>
           this.onMessage(JSON.parse(msg.nativeEvent.data))
         }
