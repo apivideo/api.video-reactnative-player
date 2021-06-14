@@ -113,15 +113,10 @@ type PlayerProps = {
 play(): void;
 pause(): void;
 requestFullscreen(): void;
-mute(): void;
-hideControls(): void;
-showControls(): void;
 seek(time: number): void;
 setCurrentTime(time: number): void;
-setLoop(loop: boolean): void;
 setPlaybackRate(rate: number): void;
 setVolume(volume: number): void;
-unmute(): void;
 ```
 
 ### FAQ
