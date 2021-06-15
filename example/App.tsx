@@ -10,18 +10,27 @@ import ApiVideoPlayer from '@api.video/react-native-player';
 import * as React from 'react';
 import {
   StyleSheet,
-  Text, View, Switch
+  Text, View, Switch, Picker, Button
 } from 'react-native';
 
+const VIDEOS = [{
+  id: "vi2BgDGC8r4sspRnMblc4WVX",
+  title: "Street video"
+},
+{
+  id: "vi2G6Qr8ZVE67dWLNymk7qbc",
+  title: "Time video"
+}];
+
 type LabeledSwitchProps = {
-  label: string, 
+  label: string,
   onPress: () => void,
   isOn: boolean,
 };
 
 // a switch button with a label
 const LabeledSwitch = (props: LabeledSwitchProps) => (
-  <View style={{ width: '25%', alignItems: 'center' }}>
+  <View style={{ width: '33%', alignItems: 'center' }}>
     <Switch
       trackColor={{ false: "#767577", true: "#81b0ff" }}
       thumbColor="#f4f3f4"
@@ -30,6 +39,7 @@ const LabeledSwitch = (props: LabeledSwitchProps) => (
     />
     <Text style={{ color: 'black' }}>{props.label}</Text>
   </View>)
+
 
 const App: () => React$Node = () => {
   const [mute, setMute] = React.useState<boolean>(true);
@@ -41,14 +51,16 @@ const App: () => React$Node = () => {
   const [currentTime, setCurrentTime] = React.useState<number>(0);
   const [events, setEvents] = React.useState<string[]>([]);
   const [eventsCount, setEventsCount] = React.useState<number>(1);
+  const [videoId, setVideoId] = React.useState<string>(VIDEOS[0].id);
   const player = React.useRef(undefined as ApiVideoPlayer);
+
 
   // add a line to the list of events displayed in the app
   const logEvent = (event: string) => {
     const eventsCopy = [...events];
-    if(eventsCopy.length > 5) eventsCopy.shift(); // we keep only the 6 last lines
+    if (eventsCopy.length > 5) eventsCopy.shift(); // we keep only the 6 last lines
     setEvents([...eventsCopy, `${eventsCount}. ${new Date().toLocaleTimeString()}: ${event}`]);
-    setEventsCount(eventsCount+1);
+    setEventsCount(eventsCount + 1);
   }
 
   return (
@@ -56,14 +68,15 @@ const App: () => React$Node = () => {
       <View style={styles.view}>
         <ApiVideoPlayer
           // we keep a ref to be able to call the play() & pause() methods
-          ref={(r) => (player.current = r)} 
-          videoId="vi2G6Qr8ZVE67dWLNymk7qbc"
+          ref={(r) => (player.current = r)}
+          videoId={videoId}
           hideControls={hideControls}
-          hideTitle={true}
+          hideTitle={hideTitle}
           muted={mute}
+          autoplay={autoPlay}
           loop={loop}
 
-          // update the current time displayed in the app
+          // update the current time displayed in the app 
           onTimeUpdate={(time) => setCurrentTime(time)}
 
           // on play/pause events, update the "isPlaying" state & log the event
@@ -80,7 +93,7 @@ const App: () => React$Node = () => {
           onPlayerResize={() => logEvent('onPlayerResize')}
           onQualityChange={() => logEvent('onQualityChange')}
           onRateChange={() => logEvent('onRateChange')}
-          onReady={() => logEvent('onReady')}
+          onReady={() => { setIsPlaying(false); logEvent('onReady'); }}
           onResize={() => logEvent('onResize')}
           onSeeking={() => logEvent('onSeeking')}
           onUserActive={() => logEvent('onUserActive')}
@@ -106,17 +119,25 @@ const App: () => React$Node = () => {
           isOn={loop}
           onPress={() => setLoop(!loop)}
         />
+      </View>
+      <View style={styles.columnsContainer}>
         <LabeledSwitch
           label='hide controls'
           isOn={hideControls}
           onPress={() => setHideControls(!hideControls)}
         />
-        {/* TODO: uncomment once it's supported by the player
-       <LabeledSwitch
-        label='Hide title'
-        isOn={hideTitle}
-        onPress={() => setHideTitle(!hideTitle)}
-      /> */}
+        <LabeledSwitch
+          label='auto play'
+          isOn={autoPlay}
+          onPress={() => setAutoPlay(!autoPlay)}
+        />
+      </View>
+
+      <View style={{ flex: 1 }}>
+        {VIDEOS.map(video => <Button
+          disabled={videoId === video.id}
+          title={video.title}
+          onPress={() => setVideoId(video.id)} />)}
       </View>
 
       <View
@@ -126,9 +147,6 @@ const App: () => React$Node = () => {
           backgroundColor: '#00000050',
         }}
       >
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>{`Current Settings:`}</Text>
-        <Text style={{ color: 'white' }}>{`Hide title: ${hideTitle}`}</Text>
-        <Text style={{ color: 'white' }}>{`Auto play: ${autoPlay}`}</Text>
         <Text style={{ color: 'white' }}>{`Current time: ${parseInt(`${currentTime * 100}`, 10) / 100}s`}</Text>
 
         <Text style={{ color: 'white', fontWeight: 'bold', marginTop: 20 }}>{`Events:`}</Text>

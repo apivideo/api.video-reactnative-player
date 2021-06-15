@@ -58,6 +58,15 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
   mute() {
     this.webref?.injectJavaScript(`player.muted(true); true;`);
   }
+  unmute() {
+    this.webref?.injectJavaScript(`player.muted(false); true;`);
+  }
+  hideTitle() {
+    this.webref?.injectJavaScript(`player.setTitleVisibility(false); true;`);
+  }
+  showTitle() {
+    this.webref?.injectJavaScript(`player.setTitleVisibility(true); true;`);
+  }
   hideControls() {
     this.webref?.injectJavaScript(
       `apiVideoPlayer.setControlsVisibility(false); true;`
@@ -67,6 +76,12 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     this.webref?.injectJavaScript(
       `apiVideoPlayer.setControlsVisibility(true); true;`
     );
+  }
+  loadConfigFromUrl(url: string) {
+    this.webref?.injectJavaScript(
+      `apiVideoPlayer.loadConfigFromUrl('${url}'); true;`
+    );
+    
   }
   seek(time: number) {
     if (isNaN(time)) throw new Error('Invalid time');
@@ -93,9 +108,6 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
 
     this.webref?.injectJavaScript(`player.volume(${volume}); true;`);
   }
-  unmute() {
-    this.webref?.injectJavaScript(`player.muted(false); true;`);
-  }
 
   constructor(props: PlayerProps) {
     super(props);
@@ -113,16 +125,13 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
       this.props.muted ? this.mute() : this.unmute();
     }
     if(typeof this.props.hideTitle !== 'undefined' && prevProps.hideTitle !== this.props.hideTitle) {
-      console.log("'hideTitle' property can't be changed once the player is loaded. It will have no effect.");
-    }
-    if(typeof this.props.autoplay !== 'undefined' && prevProps.autoplay !== this.props.autoplay) {
-      console.log("'autoplay' property can't be changed once the player is loaded. It will have no effect.");
-    }
-    if(typeof this.props.type !== 'undefined' && prevProps.type !== this.props.type) {
-      console.log("'type' property can't be changed once the player is loaded. It will have no effect.");
+      this.props.hideTitle ? this.hideTitle() : this.showTitle();
     }
     if(typeof this.props.videoId !== 'undefined' && prevProps.videoId !== this.props.videoId) {
-      console.log("'videoId' property can't be changed once the player is loaded. It will have no effect.");
+      this.loadConfigFromUrl(this.buildEmbedUrl(this.props));
+    }
+    if(typeof this.props.type !== 'undefined' && prevProps.type !== this.props.type) {
+      this.loadConfigFromUrl(this.buildEmbedUrl(this.props));
     }
   }
 
