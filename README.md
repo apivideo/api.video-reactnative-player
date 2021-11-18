@@ -1,17 +1,28 @@
-[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video)
-
-[![badge](https://img.shields.io/github/stars/apivideo/react-native-player?style=social)](https://github.com/apivideo/react-native-player)
-
-[![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
-
+[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/api.video-reactnative-player?style=social)](https://github.com/apivideo/api.video-reactnative-player) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
-
-[api.video](https://api.video) is an API that encodes on the go to facilitate immediate playback, enhancing viewer streaming experiences across multiple devices and platforms. You can stream live or on-demand online videos within minutes.
-
-# @api.video/react-native-player
 ![npm](https://img.shields.io/npm/v/@api.video/react-native-player) ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
+<h1 align="center">api.video React Native video player</h1>
+
+[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+
+# Table of contents
+
+- [Table of contents](#table-of-contents)
+- [Project description](#project-description)
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Limitations](#limitations)
+  - [Code sample](#code-sample)
+- [Documentation](#documentation)
+  - [Props & Methods](#props--methods)
+  - [Using methods](#using-methods)
+- [FAQ](#faq)
+
+# Project description
 
 React Native video player to play vod and lives from api.video 
+
+# Getting started
 
 ## Installation
 
@@ -36,9 +47,7 @@ Especially, on Android decives, the first play action on an unmuted video must t
 
 We plan to base the player component on natives video players in a further release to avoid this kind of limitation. Stay tuned!
 
-## Usage
-
-### Getting started
+## Code sample
 
 ```jsx
 import React from 'react';
@@ -50,31 +59,7 @@ const App = () =>
 export default App;
 ```
 
-### Using methods
-```jsx
-import React, { Component } from 'react';
-import ApiVideoPlayer from '@api.video/react-native-player';
-import { Button, View } from 'react-native';
-
-export default class App extends Component {
-
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <ApiVideoPlayer
-          ref={(r) => (this.player = r)}
-          muted={true}
-          videoId="vi2G6Qr8ZVE67dWLNymk7qbc" />
-
-        <Button onPress={() => this.player.play()} title="Play" />
-        <Button onPress={() => this.player.pause()} title="Pause" />
-
-      </View>
-    )
-  }
-}
-```
-
+# Documentation
 
 ## Props & Methods
 
@@ -128,15 +113,37 @@ setPlaybackRate(rate: number): void;
 setVolume(volume: number): void;
 ```
 
-### FAQ
+## Using methods
+```jsx
+import React, { Component } from 'react';
+import ApiVideoPlayer from '@api.video/react-native-player';
+import { Button, View } from 'react-native';
+
+export default class App extends Component {
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ApiVideoPlayer
+          ref={(r) => (this.player = r)}
+          muted={true}
+          videoId="vi2G6Qr8ZVE67dWLNymk7qbc" />
+
+        <Button onPress={() => this.player.play()} title="Play" />
+        <Button onPress={() => this.player.pause()} title="Pause" />
+
+      </View>
+    )
+  }
+}
+```
+
+
+# FAQ
 If you have any questions, ask us here:  https://community.api.video .
 Or use [Issues].
 
-## License
-
-MIT License
-Copyright (c) 2021 api.video
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [Issues]: <https://github.com/apivideo/react-native-player/issues>
+   [Issues]: <https://github.com/apivideo/api.video-reactnative-player/issues>

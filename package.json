@@ -5,7 +5,7 @@
   "description": "React Native api.video player",
   "repository": {
     "type": "git",
-    "url": "https://github.com/api.video/react-native-player/"
+    "url": "https://github.com/api.video/api.video-reactnative-player/"
   },
   "license": "MIT",
   "keywords": [
@@ -63,9 +63,9 @@
     "react-native-webview"
   ],
   "bugs": {
-    "url": "https://github.com/api.video/react-native-player/issues"
+    "url": "https://github.com/api.video/api.video-reactnative-player/issues"
   },
-  "homepage": "https://github.com/api.video/react-native-player",
+  "homepage": "https://github.com/api.video/api.video-reactnative-player",
   "jest": {
     "preset": "react-native",
     "transform": {
