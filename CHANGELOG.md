@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.0] - 2021-12-13
+- Allow autoplay on not muted videos
+
 ## [0.0.6] - 2021-06-14
 - Possibility to change hideTitle & videoId props during playback
 - Implement these new options in the sample

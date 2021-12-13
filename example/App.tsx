@@ -42,10 +42,10 @@ const LabeledSwitch = (props: LabeledSwitchProps) => (
 
 
 const App: () => React$Node = () => {
-  const [mute, setMute] = React.useState<boolean>(true);
+  const [mute, setMute] = React.useState<boolean>(false);
   const [hideControls, setHideControls] = React.useState<boolean>(false);
   const [hideTitle, setHideTitle] = React.useState<boolean>(false);
-  const [autoPlay, setAutoPlay] = React.useState<boolean>(false);
+  const [autoPlay, setAutoPlay] = React.useState<boolean>(true);
   const [loop, setLoop] = React.useState<boolean>(false);
   const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
   const [currentTime, setCurrentTime] = React.useState<number>(0);

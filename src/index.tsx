@@ -81,7 +81,6 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     this.webref?.injectJavaScript(
       `apiVideoPlayer.loadConfigFromUrl('${url}'); true;`
     );
-    
   }
   seek(time: number) {
     if (isNaN(time)) throw new Error('Invalid time');
@@ -115,22 +114,40 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
   }
 
   componentDidUpdate(prevProps: PlayerProps) {
-    if(typeof this.props.hideControls !== 'undefined' && prevProps.hideControls !== this.props.hideControls) {
+    if (
+      typeof this.props.hideControls !== 'undefined' &&
+      prevProps.hideControls !== this.props.hideControls
+    ) {
       this.props.hideControls ? this.hideControls() : this.showControls();
     }
-    if(typeof this.props.loop !== 'undefined' && prevProps.loop !== this.props.loop) {
+    if (
+      typeof this.props.loop !== 'undefined' &&
+      prevProps.loop !== this.props.loop
+    ) {
       this.setLoop(this.props.loop);
     }
-    if(typeof this.props.muted !== 'undefined' && prevProps.muted !== this.props.muted) {
+    if (
+      typeof this.props.muted !== 'undefined' &&
+      prevProps.muted !== this.props.muted
+    ) {
       this.props.muted ? this.mute() : this.unmute();
     }
-    if(typeof this.props.hideTitle !== 'undefined' && prevProps.hideTitle !== this.props.hideTitle) {
+    if (
+      typeof this.props.hideTitle !== 'undefined' &&
+      prevProps.hideTitle !== this.props.hideTitle
+    ) {
       this.props.hideTitle ? this.hideTitle() : this.showTitle();
     }
-    if(typeof this.props.videoId !== 'undefined' && prevProps.videoId !== this.props.videoId) {
+    if (
+      typeof this.props.videoId !== 'undefined' &&
+      prevProps.videoId !== this.props.videoId
+    ) {
       this.loadConfigFromUrl(this.buildEmbedUrl(this.props));
     }
-    if(typeof this.props.type !== 'undefined' && prevProps.type !== this.props.type) {
+    if (
+      typeof this.props.type !== 'undefined' &&
+      prevProps.type !== this.props.type
+    ) {
       this.loadConfigFromUrl(this.buildEmbedUrl(this.props));
     }
   }
@@ -201,9 +218,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
   }
 
   buildEmbedUrl(props: PlayerProps) {
-    let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${
-      props.videoId
-    }`;
+    let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${props.videoId}`;
 
     if (props.muted === true) {
       url += '?muted=true';
@@ -231,6 +246,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
         }
         allowsInlineMediaPlayback={true}
         allowsFullscreenVideo={true}
+        mediaPlaybackRequiresUserAction={false}
         injectedJavaScriptBeforeContentLoaded={`window.addEventListener('message', (m) => window.ReactNativeWebView.postMessage(JSON.stringify(m.data)))`}
       />
     );
