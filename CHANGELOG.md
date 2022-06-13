@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.1] - 2022-06-13
+- Remove react-native peer dependency max version constraint
+
 ## [1.0.0] - 2021-12-13
 - Allow autoplay on not muted videos
 

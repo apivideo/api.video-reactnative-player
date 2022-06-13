@@ -1,7 +1,7 @@
 {
   "name": "@api.video/react-native-player",
   "author": "api.video",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Native api.video player",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "postinstall": "node ./scripts/add-native-deps.js"
   },
   "peerDependencies": {
-    "react-native": ">=0.60 <=0.64"
+    "react-native": ">=0.60"
   },
   "husky": {
     "hooks": {
