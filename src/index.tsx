@@ -7,6 +7,8 @@ const DEFAULT_STYLE = { width: '100%', height: '100%' };
 
 export type PlayerProps = {
   videoId: string;
+  privateToken?: string;
+  sessionToken?: string;
   type?: 'vod' | 'live';
   hideControls?: boolean;
   hideTitle?: boolean;
@@ -217,13 +219,33 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     }
   }
 
+  buildQueryParameters(originalProps: any) : string {
+    if('privateToken' in originalProps ||
+      'sessionToken' in originalProps ||
+      ('muted' in originalProps && originalProps.muted)
+      ) {
+      let query = "?"
+      const keyToQueryParameMap: any = {
+        privateToken: 'token',
+        sessionToken: 'avh',
+        muted: 'muted',
+      }
+      for (const key in originalProps) {
+        if(key === 'privateToken' || key === 'sessionToken' || key === 'muted') {
+          query += `${keyToQueryParameMap[key]}=${originalProps[key]}&`;
+        }
+      }
+      return query
+    } else {
+      return ''
+    }
+  }
+
   buildEmbedUrl(props: PlayerProps) {
     let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${props.videoId}`;
 
-    if (props.muted === true) {
-      url += '?muted=true';
-    }
-
+    url += this.buildQueryParameters(props);
+    
     const fragments = Object.keys(FRAGMENTS).filter(
       (fragment: string) => (props as any)[fragment] === true
     );
