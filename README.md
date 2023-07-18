@@ -66,11 +66,11 @@ export default App;
 type PlayerProps = {
     // the id of the video (required)
     videoId: string;
-    // whether the video is vod or live (default is 'vod')
-    privateToken?: string;
     // if the video is private, the private token of the video
-    sessionToken?: string;
+    privateToken?: string;
     // if the video is private, the session token for the video (avh)
+    sessionToken?: string;
+    // whether the video is vod or live (default is 'vod')
     type?: 'vod' | 'live';
     // the controls are hidden (default false)
     hideControls?: boolean;
