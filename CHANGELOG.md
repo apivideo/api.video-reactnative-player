@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.2] - 2023-07-18
+- Add private video support
+
 ## [1.0.1] - 2022-06-13
 - Remove react-native peer dependency max version constraint
 
