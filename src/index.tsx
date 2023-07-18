@@ -219,25 +219,30 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     }
   }
 
-  buildQueryParameters(originalProps: any) : string {
-    if('privateToken' in originalProps ||
+  buildQueryParameters(originalProps: any): string {
+    if (
+      'privateToken' in originalProps ||
       'sessionToken' in originalProps ||
       ('muted' in originalProps && originalProps.muted)
-      ) {
-      let query = "?"
+    ) {
+      let query = '?';
       const keyToQueryParameMap: any = {
         privateToken: 'token',
         sessionToken: 'avh',
         muted: 'muted',
-      }
+      };
       for (const key in originalProps) {
-        if(key === 'privateToken' || key === 'sessionToken' || key === 'muted') {
+        if (
+          key === 'privateToken' ||
+          key === 'sessionToken' ||
+          key === 'muted'
+        ) {
           query += `${keyToQueryParameMap[key]}=${originalProps[key]}&`;
         }
       }
-      return query
+      return query;
     } else {
-      return ''
+      return '';
     }
   }
 
@@ -245,7 +250,7 @@ export default class ApiVideoPlayer extends Component<PlayerProps, {}> {
     let url = `${PLAYER_HOST}/${this.props.type || 'vod'}/${props.videoId}`;
 
     url += this.buildQueryParameters(props);
-    
+
     const fragments = Object.keys(FRAGMENTS).filter(
       (fragment: string) => (props as any)[fragment] === true
     );
