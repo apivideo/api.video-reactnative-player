@@ -1,3 +1,4 @@
+<!--<documentation_excluded>-->
 [![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/api.video-reactnative-player?style=social)](https://github.com/apivideo/api.video-reactnative-player) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
 ![npm](https://img.shields.io/npm/v/@api.video/react-native-player) ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
@@ -5,7 +6,7 @@
 
 [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
+## Table of contents
 
 - [Table of contents](#table-of-contents)
 - [Project description](#project-description)
@@ -18,13 +19,26 @@
   - [Using methods](#using-methods)
 - [FAQ](#faq)
 
-# Project description
+<!--</documentation_excluded>-->
+<!--<documentation_only>
+---
+title: api.video React Native Player
+meta: 
+  description: The official api.video React Native Player for api.video. [api.video](https://api./) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+---
+
+# api.video React Native Player
+
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+
+</documentation_only>-->
+## Project description
 
 React Native video player to play vod and lives from api.video 
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
 ```sh
 npm install @api.video/react-native-player
@@ -39,13 +53,13 @@ Install the native dependencies with Cocoapods
 cd ios && pod install
 ```
 
-## Limitations
+### Limitations
 
 For the moment, this player component is based on the api.video's javascript player (displayed in a [react-native-webview](https://github.com/react-native-webview/react-native-webview)), and therefore it suffers from the same limitation as every players displayed in browsers. 
 
 We plan to base the player component on natives video players in a further release to avoid this kind of limitation. Stay tuned!
 
-## Code sample
+### Code sample
 
 ```jsx
 import React from 'react';
@@ -57,9 +71,9 @@ const App = () =>
 export default App;
 ```
 
-# Documentation
+## Documentation
 
-## Props & Methods
+### Props & Methods
 
 ```ts
 // props:
@@ -115,7 +129,7 @@ setPlaybackRate(rate: number): void;
 setVolume(volume: number): void;
 ```
 
-## Using methods
+### Using methods
 ```jsx
 import React, { Component } from 'react';
 import ApiVideoPlayer from '@api.video/react-native-player';
@@ -141,7 +155,7 @@ export default class App extends Component {
 ```
 
 
-# FAQ
+## FAQ
 If you have any questions, ask us here:  https://community.api.video .
 Or use [Issues].
 
