@@ -1,32 +1,27 @@
 {
-  "name": "example",
-  "version": "0.0.1",
-  "private": true,
+  "name": "reactnative-player-example",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint .",
-    "postinstall": "rm -Rf node_modules/@api.video/react-native-player/node_modules/react*"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
   },
   "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.0",
-    "@api.video/react-native-player": "../",
-    "react-native-webview": "^11.6.2"
+    "expo": "~51.0.14",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.2",
+    "react-native-web": "~0.19.10",
+    "react-native-webview": "^13.10.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/runtime": "^7.8.4",
-    "@react-native-community/eslint-config": "^1.1.0",
-    "babel-jest": "^25.1.0",
-    "eslint": "^6.5.1",
-    "jest": "^25.1.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-test-renderer": "16.13.1"
+    "@babel/core": "^7.20.0",
+    "@expo/webpack-config": "^18.0.1",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^5.0.0"
   },
-  "jest": {
-    "preset": "react-native"
-  }
+  "private": true
 }
