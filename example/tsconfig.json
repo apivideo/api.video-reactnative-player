@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".", // Cela définit la base du dossier pour la résolution des modules
+    "paths": {
+      "@api.video/react-native-player": [".."] // Ajustez le chemin selon l'emplacement réel
+    }
+  }
+}
