@@ -9,6 +9,7 @@
 import ApiVideoPlayer, {
   type ApiVideoPlayerRef,
 } from '@api.video/react-native-player';
+
 import * as React from 'react';
 import { Button, StyleSheet, Switch, Text, View } from 'react-native';
 
@@ -45,8 +46,8 @@ const LabeledSwitch = (props: LabeledSwitchProps) => (
 const App: () => React.ReactNode = () => {
   const [mute, setMute] = React.useState<boolean>(false);
   const [hideControls, setHideControls] = React.useState<boolean>(false);
-  const [hideTitle, setHideTitle] = React.useState<boolean>(false);
-  const [autoPlay, setAutoPlay] = React.useState<boolean>(true);
+  const [chromeless, setChromeless] = React.useState<boolean>(true);
+  const [autoPlay, setAutoPlay] = React.useState<boolean>(false);
   const [loop, setLoop] = React.useState<boolean>(false);
   const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
   const [currentTime, setCurrentTime] = React.useState<number>(0);
@@ -75,7 +76,8 @@ const App: () => React.ReactNode = () => {
           ref={(r) => (player.current = r)}
           videoId={videoId}
           hideControls={hideControls}
-          hideTitle={hideTitle}
+          responsive={true}
+          chromeless={chromeless}
           muted={mute}
           autoplay={autoPlay}
           loop={loop}
@@ -100,10 +102,7 @@ const App: () => React.ReactNode = () => {
           onPlayerResize={() => logEvent('onPlayerResize')}
           onQualityChange={() => logEvent('onQualityChange')}
           onRateChange={() => logEvent('onRateChange')}
-          onReady={() => {
-            setIsPlaying(false);
-            logEvent('onReady');
-          }}
+          onReady={() => logEvent('onReady')}
           onResize={() => logEvent('onResize')}
           onSeeking={() => logEvent('onSeeking')}
           onUserActive={() => logEvent('onUserActive')}
@@ -136,6 +135,11 @@ const App: () => React.ReactNode = () => {
           label="hide controls"
           isOn={hideControls}
           onPress={() => setHideControls(!hideControls)}
+        />
+        <LabeledSwitch
+          label="chromeless"
+          isOn={chromeless}
+          onPress={() => setChromeless(!chromeless)}
         />
         <LabeledSwitch
           label="auto play"
@@ -185,7 +189,7 @@ const styles = StyleSheet.create({
   },
   columnsContainer: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 50,
     marginBottom: 20,
   },
 });

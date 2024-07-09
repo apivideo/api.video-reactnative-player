@@ -5,7 +5,7 @@ import React, {
   useRef,
   type Ref,
 } from 'react';
-import { type StyleProp, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewStyle } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 const PLAYER_HOST = 'https://embed.api.video';
@@ -17,11 +17,13 @@ export type PlayerProps = {
   sessionToken?: string;
   type?: 'vod' | 'live';
   hideControls?: boolean;
+  chromeless?: boolean;
   hideTitle?: boolean;
   autoplay?: boolean;
   loop?: boolean;
   muted?: boolean;
   style?: StyleProp<ViewStyle>;
+  responsive?: boolean;
 
   onControlsDisabled?: () => void;
   onControlsEnabled?: () => void;
@@ -63,6 +65,7 @@ export interface ApiVideoPlayerRef {
   hideTitle: () => void;
   showTitle: () => void;
   hideControls: () => void;
+  setChromeless: (chromeless: boolean) => void;
   showControls: () => void;
   loadConfigFromUrl: (url: string) => void;
   seek: (time: number) => void;
@@ -156,6 +159,10 @@ const ApiVideoPlayer = forwardRef(
         if (isNaN(volume)) throw new Error('Invalid volume');
         injectJavaScript(`player.volume(${volume});`);
       },
+      setChromeless: (chromeless: boolean) => {
+        console.log('toto');
+        injectJavaScript(`player.setChromeless(${chromeless});`);
+      },
     }));
 
     useEffect(() => {
@@ -165,6 +172,12 @@ const ApiVideoPlayer = forwardRef(
           : injectJavaScript('apiVideoPlayer.setControlsVisibility(true);');
       }
     }, [props.hideControls]);
+
+    useEffect(() => {
+      if (props.chromeless !== undefined) {
+        injectJavaScript(`player.setChromeless(${props.chromeless});`);
+      }
+    }, [props.chromeless]);
 
     useEffect(() => {
       if (props.loop !== undefined) {
@@ -266,20 +279,47 @@ const ApiVideoPlayer = forwardRef(
       }
     };
 
+    const webViewStyle: StyleProp<ViewStyle> = props.style || DEFAULT_STYLE;
+    const innerStyle = { ...(webViewStyle as any) };
+
     return playerUrl ? (
-      <WebView
-        ref={webref}
-        source={{ uri: playerUrl }}
-        style={props.style || DEFAULT_STYLE}
-        scrollEnabled={false}
-        onMessage={(msg) => onMessage(JSON.parse(msg.nativeEvent.data))}
-        allowsInlineMediaPlayback={true}
-        allowsFullscreenVideo={true}
-        mediaPlaybackRequiresUserAction={false}
-        injectedJavaScriptBeforeContentLoaded={`window.addEventListener('message', (m) => window.ReactNativeWebView.postMessage(JSON.stringify(m.data)))`}
-      />
+      <ResponsiveContainer
+        ratio={ratio}
+        isResponsive={props.responsive || false}
+        width={((props.style || DEFAULT_STYLE) as any)?.width}
+      >
+        <WebView
+          ref={webref}
+          source={{ uri: playerUrl }}
+          style={{
+            ...innerStyle,
+            ...(props.responsive ? { width: '100%' } : {}),
+          }}
+          scrollEnabled={false}
+          onMessage={(msg) => onMessage(JSON.parse(msg.nativeEvent.data))}
+          allowsInlineMediaPlayback={true}
+          allowsFullscreenVideo={true}
+          mediaPlaybackRequiresUserAction={false}
+          injectedJavaScriptBeforeContentLoaded={`window.addEventListener('message', (m) => window.ReactNativeWebView.postMessage(JSON.stringify(m.data)))`}
+        />
+      </ResponsiveContainer>
     ) : null;
   }
 );
+
+const ResponsiveContainer = (props: {
+  isResponsive: boolean;
+  width?: number;
+  ratio?: number;
+  children: JSX.Element;
+}): JSX.Element => {
+  if (!props.isResponsive || !props.width || !props.ratio)
+    return props.children;
+  return (
+    <View style={{ width: props.width, aspectRatio: props.ratio }}>
+      {props.children}
+    </View>
+  );
+};
 
 export default ApiVideoPlayer;

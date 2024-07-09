@@ -5,6 +5,7 @@ All changes to this project will be documented in this file.
 ## [1.1.0] - 2024-06-18
 
 - Bump depdependencies versions. Migrate to functionnal component.
+- Add `chromeless` and `responsive` options
 
 ## [1.0.2] - 2023-07-18
 

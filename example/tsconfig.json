@@ -1,6 +1,9 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    // Avoid expo-cli auto-generating a tsconfig
+    "baseUrl": ".", // Cela définit la base du dossier pour la résolution des modules
+    "paths": {
+      "@api.video/react-native-player": [".."] // Ajustez le chemin selon l'emplacement réel
+    }
   }
 }
