@@ -30,7 +30,7 @@ export type PlayerProps = {
   onEnded?: () => void;
   onError?: () => void;
   onFirstPlay?: () => void;
-  onFullScreenChange?: () => void;
+  onFullScreenChange?: (isFullScreen: boolean) => void;
   onPause?: () => void;
   onPlay?: () => void;
   onPlayerResize?: () => void;
@@ -228,7 +228,8 @@ const ApiVideoPlayer = forwardRef(
           props.onFirstPlay && props.onFirstPlay();
           break;
         case 'fullscreenchange':
-          props.onFullScreenChange && props.onFullScreenChange();
+          props.onFullScreenChange &&
+            props.onFullScreenChange(message.isFullScreen);
           break;
         case 'pause':
           props.onPause && props.onPause();

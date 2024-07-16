@@ -98,7 +98,9 @@ const App: () => React.ReactNode = () => {
           onEnded={() => logEvent('onEnded')}
           onError={() => logEvent('onError')}
           onFirstPlay={() => logEvent('onFirstPlay')}
-          onFullScreenChange={() => logEvent('onFullScreenChange')}
+          onFullScreenChange={(isFullScreen: boolean) => {
+            logEvent(`onFullScreenChange: ${isFullScreen ? 'true' : 'false'}`);
+          }}
           onPlayerResize={() => logEvent('onPlayerResize')}
           onQualityChange={() => logEvent('onQualityChange')}
           onRateChange={() => logEvent('onRateChange')}
