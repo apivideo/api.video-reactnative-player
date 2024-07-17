@@ -159,10 +159,8 @@ const ApiVideoPlayer = forwardRef(
         if (isNaN(volume)) throw new Error('Invalid volume');
         injectJavaScript(`player.volume(${volume});`);
       },
-      setChromeless: (chromeless: boolean) => {
-        console.log('toto');
-        injectJavaScript(`player.setChromeless(${chromeless});`);
-      },
+      setChromeless: (chromeless: boolean) =>
+        injectJavaScript(`apiVideoPlayer.setChromeless(${chromeless});`),
     }));
 
     useEffect(() => {
@@ -175,7 +173,7 @@ const ApiVideoPlayer = forwardRef(
 
     useEffect(() => {
       if (props.chromeless !== undefined) {
-        injectJavaScript(`player.setChromeless(${props.chromeless});`);
+        injectJavaScript(`apiVideoPlayer.setChromeless(${props.chromeless});`);
       }
     }, [props.chromeless]);
 
