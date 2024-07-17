@@ -2,6 +2,11 @@
 
 All changes to this project will be documented in this file.
 
+## [1.1.1] - 2024-07-17
+
+- Add `isFullScreen` in `onFullScreenChange` event
+- Fix `chromeless`
+
 ## [1.1.0] - 2024-06-18
 
 - Bump depdependencies versions. Migrate to functionnal component.

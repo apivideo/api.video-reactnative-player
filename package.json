@@ -1,7 +1,7 @@
 {
   "name": "@api.video/react-native-player",
   "author": "api.video <ecosystem@api.video>",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React Native api.video player",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
